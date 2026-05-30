@@ -1,0 +1,384 @@
+/* ==========================================
+   CYBERPUNK / GOTH MATRIX PREMIUM DESIGN
+   ========================================== */
+
+/* Temel Sıfırlama ve Font Ayarı */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Consolas', 'Courier New', monospace;
+}
+
+body {
+    background-color: #050508; /* Ultra derin siber siyah */
+    color: #E0E0E6;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+/* ==========================================
+   SOL PANEL: SİBER SEYİR (SIDEBAR)
+   ========================================== */
+.sidebar {
+    width: 320px;
+    background-color: #0A0A10; /* Koyu metalik gri */
+    border-right: 1px solid #141420; /* Siber border çizgisi */
+    display: flex;
+    flex-direction: column;
+    padding: 40px 20px;
+    height: 100%;
+    flex-shrink: 0;
+}
+
+.logo {
+    color: #BD00FF; /* Elektrik Moru */
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 50px;
+    text-shadow: 0 0 10px rgba(189, 0, 255, 0.4);
+}
+
+.menu-title {
+    color: #525260;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    letter-spacing: 1px;
+}
+
+/* Kategori Butonları */
+.menu-btn {
+    background: transparent;
+    border: none;
+    color: #A0A0A5;
+    padding: 16px 20px;
+    text-align: left;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+.menu-btn:hover {
+    background-color: #10101C;
+    color: #E0E0E6;
+    padding-left: 25px;
+}
+
+/* Aktif Sekme Vurgusu */
+.menu-btn.active {
+    background-color: #141424;
+    color: #00D2FF; /* Neon Mavi */
+    font-weight: bold;
+    box-shadow: inset 3px 0 0 #00D2FF;
+}
+
+/* En Alttaki Master Dashboard Butonu */
+.master-btn {
+    background-color: #BD00FF;
+    color: #FFFFFF !important;
+    font-weight: bold;
+    margin-top: auto;
+    text-align: center;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(189, 0, 255, 0.2);
+}
+
+.master-btn:hover {
+    background-color: #A000DB;
+    box-shadow: 0 0 20px #BD00FF;
+    padding-left: 20px; /* Standart buton kaymasını sıfırlamak için */
+}
+
+
+/* ==========================================
+   SAĞ PANEL: CORE İÇERİK ALANI
+   ========================================== */
+.content-area {
+    flex: 1;
+    padding: 60px;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ekran Geçiş Gizleme/Gösterme Düzeni */
+.screen {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.screen.active {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Screen Başlıkları */
+.screen-title {
+    font-size: 24px;
+    color: #00D2FF;
+    margin-bottom: 35px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+
+/* ==========================================
+   KATEGORİ 1: ANA EKRAN (WELCOME CORE)
+   ========================================== */
+.clock-container {
+    text-align: center;
+    margin-top: 8vh;
+}
+
+#clock {
+    font-size: 110px;
+    font-weight: bold;
+    color: #00D2FF;
+    text-shadow: 0 0 40px rgba(0, 210, 255, 0.25);
+    letter-spacing: -2px;
+    margin-bottom: 15px;
+}
+
+.system-status {
+    color: #1DB954; /* Spotify Yeşili */
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 100px;
+}
+
+/* Dev Motivasyon Sözü Kutusu */
+.quote-card {
+    background-color: #0B0B12;
+    border: 1px solid #141424;
+    border-radius: 20px;
+    padding: 45px;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.quote-text {
+    font-size: 22px;
+    font-style: italic;
+    color: #FFFFFF;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.quote-author {
+    font-size: 15px;
+    color: #525260;
+    text-align: right;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+
+/* ==========================================
+   VERİ GİRİŞ ELEMANLARI (INPUTS)
+   ========================================== */
+.input-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+input[type="text"] {
+    flex: 1;
+    background-color: #0A0A10;
+    border: 1px solid #141424;
+    border-radius: 12px;
+    padding: 18px 25px;
+    color: #FFFFFF;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #BD00FF;
+    box-shadow: 0 0 10px rgba(189, 0, 255, 0.1);
+}
+
+.action-btn {
+    background-color: #BD00FF;
+    color: #FFFFFF;
+    border: none;
+    padding: 0 35px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.action-btn:hover {
+    background-color: #A000DB;
+}
+
+
+/* ==========================================
+   LİSTELEME ALANLARI VE SATIRLAR
+   ========================================== */
+.list-container {
+    background-color: #0A0A10;
+    border: 1px solid #141420;
+    border-radius: 16px;
+    padding: 20px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.item-row {
+    background-color: #10101A;
+    border-radius: 10px;
+    padding: 18px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    border: 1px solid transparent;
+    transition: border 0.2s;
+}
+
+.item-row:hover {
+    border-color: #141424;
+}
+
+.item-text {
+    font-size: 16px;
+    color: #E0E0E6;
+}
+
+.delete-btn {
+    background: transparent;
+    border: none;
+    color: #525260;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+}
+
+.delete-btn:hover {
+    color: #FF3366; /* Neon Kırmızı */
+}
+
+
+/* ==========================================
+   KATEGORİ 5: REAL SPOTIFY PANELİ
+   ========================================== */
+.spotify-card {
+    background-color: #060A08; /* Koyu Spotify Siyahı */
+    border: 1px solid #1DB954;
+    border-radius: 24px;
+    padding: 80px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    box-shadow: 0 15px 40px rgba(29, 185, 84, 0.05);
+}
+
+#track-name {
+    font-size: 36px;
+    font-weight: bold;
+    color: #FFFFFF;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+}
+
+#artist-name {
+    font-size: 18px;
+    color: #525260;
+    margin-bottom: 60px;
+}
+
+.media-controls {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.media-btn {
+    background: transparent;
+    border: none;
+    color: #FFFFFF;
+    font-size: 32px;
+    cursor: pointer;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.media-btn:hover {
+    transform: scale(1.1);
+    color: #1DB954;
+}
+
+.play-pause-btn {
+    background-color: #1DB954;
+    color: #000000;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    font-size: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(29, 185, 84, 0.4);
+}
+
+.play-pause-btn:hover {
+    transform: scale(1.05);
+    background-color: #1ED760;
+}
+
+
+/* ==========================================
+   KATEGORİ 6: MASTER DASHBOARD MATRIX
+   ========================================== */
+.matrix-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.matrix-card {
+    background-color: #0A0A12;
+    border: 1px solid #141424;
+    border-radius: 16px;
+    padding: 30px;
+}
+
+.matrix-card-title {
+    color: #00D2FF;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.matrix-item {
+    color: #B8B8C4;
+    font-size: 15px;
+    margin-bottom: 10px;
+    padding-left: 15px;
+}

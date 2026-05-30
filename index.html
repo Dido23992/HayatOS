@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HayatOS // Premium Web Agent</title>
+    <style>
+        /* ==========================================
+           CYBERPUNK / GOTH MATRIX CSS TASARIMI
+           ========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+
+        body {
+            background-color: #050508;
+            color: #E0E0E6;
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+
+        /* SOL PANEL - SİBER MENÜ */
+        .sidebar {
+            width: 320px;
+            background-color: #0A0A10;
+            border-right: 1px solid #141420;
+            display: flex;
+            flex-direction: column;
+            padding: 30px 20px;
+            height: 100%;
+        }
+
+        .logo {
+            color: #BD00FF;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+        }
+
+        .menu-title {
+            color: #525260;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            padding-left: 10px;
+        }
+
+        .menu-btn {
+            background: transparent;
+            border: none;
+            color: #A0A0A5;
+            padding: 15px;
+            text-align: left;
+            font-size: 15px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-bottom: 5px;
+            width: 100%;
+        }
+
+        .menu-btn:hover, .menu-btn.active {
+            background-color: #141424;
+            color: #00D2FF;
+            padding-left: 20px;
+        }
+
+        .master-btn {
+            background-color: #BD00FF;
+            color: #FFFFFF;
+            font-weight: bold;
+            margin-top: auto;
+            text-align: center;
+            padding: 18px;
+        }
+
+        .master-btn:hover {
+            background-color: #A000DB;
+            color: #FFFFFF;
+            box-shadow: 0 0 15px #BD00FF;
+        }
+
+        /* SAĞ PANEL - İÇERİK ALANI */
+        .content-area {
+            flex: 1;
+            padding: 60px;
+            height: 100%;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .screen {
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .screen.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* CORE / ANA EKRAN TASARIMI */
+        .clock-container {
+            text-align: center;
+            margin-top: 10vh;
+        }
+
+        #clock {
+            font-size: 130px;
+            font-weight: bold;
+            color: #00D2FF;
+            text-shadow: 0 0 30px rgba(0, 210, 255, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .system-status {
+            color: #1DB954;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 80px;
+        }
+
+        .quote-card {
+            background-color: #0B0B12;
+            border: 1px solid #141424;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .quote-text {
+            font-size: 24px;
+            font-style: italic;
+            color: #FFFFFF;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .quote-author {
+            font-size: 16px;
+            color: #525260;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        /* MATRİS BAŞLIKLARI */
+        .screen-title {
+            font-size: 26px;
+            color: #00D2FF;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* VERİ GİRİŞ ALANLARI (INPUT & BUTTON) */
+        .input-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        input {
+            flex: 1;
+            background-color: #0A0A10;
+            border: 1px solid #141424;
+            border-radius: 10px;
+            padding: 15px 20px;
+            color: #FFFFFF;
+            font-size: 16px;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        input:focus {
+            border-color: #BD00FF;
+        }
+
+        .action-btn {
+            background-color: #BD00FF;
+            color: #FFFFFF;
+            border: none;
+            padding: 0 30px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .action-btn:hover {
+            background-color: #A000DB;
+        }
+
+        /* LİSTELEME KARTLARI */
+        .list-container {
+            background-color: #0A0A10;
+            border: 1px solid #141420;
+            border-radius: 15px;
+            padding: 15px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .item-row {
+            background-color: #10101A;
+            border-radius: 10px;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .item-text {
+            font-size: 16px;
+            color: #E0E0E6;
+        }
+
+        .delete-btn {
+            background: transparent;
+            border: none;
+            color: #525260;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .delete-btn:hover {
+            color: #FF3366;
+        }
+
+        /* SPOTIFY KARTI PRO */
+        .spotify-card {
+            background-color: #060A08;
+            border: 1px solid #1DB954;
+            border-radius: 20px;
+            padding: 60px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+        }
+
+        #track-name {
+            font-size: 36px;
+            font-weight: bold;
+            color: #FFFFFF;
+            margin-bottom: 15px;
+        }
+
+        #artist-name {
+            font-size: 20px;
+            color: #525260;
+            margin-bottom: 60px;
+        }
+
+        .media-controls {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .media-btn {
+            background: transparent;
+            border: none;
+            color: #FFFFFF;
+            font-size: 28px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .media-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .play-pause-btn {
+            background-color: #1DB954;
+            color: #000000;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* MASTER DASHBOARD KARTLARI */
+        .matrix-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .matrix-card {
+            background-color: #0A0A12;
+            border: 1px solid #141424;
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .matrix-card-title {
+            color: #00D2FF;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .matrix-item {
+            color: #B8B8C4;
+            font-size: 15px;
+            margin-bottom: 8px;
+            padding-left: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="logo">⚡ HAYAT_OS // AGENT</div>
+        <div class="menu-title">Sistem Menüsü</div>
+        <button class="menu-btn active" onclick="switchScreen('welcome')">⚡ Ana Ekran / Core</button>
+        <button class="menu-btn" onclick="switchScreen('todo')">✓ To-Do List</button>
+        <button class="menu-btn" onclick="switchScreen('goals')">🎯 Stratejik Hedefler</button>
+        <button class="menu-btn" onclick="switchScreen('calendar')">📅 Etkinlik Takvimi</button>
+        <button class="menu-btn" onclick="switchScreen('spotify')">♫ Real Spotify</button>
+        <button class="menu-btn master-btn" onclick="switchScreen('master')">MASTER DASHBOARD</button>
+    </div>
+
+    <div class="content-area">
+
+        <div id="screen-welcome" class="screen active">
+            <div class="clock-container">
+                <div id="clock">00:00:00</div>
+                <div class="system-status">● CORE_SYSTEM_ONLINE // MATRIX_SECURE_VERIFIED</div>
+            </div>
+            <div class="quote-card">
+                <div class="quote-text" id="main-quote">"Başarı, küçük şeylerin her gün tekrarlanmasıdır."</div>
+                <div class="quote-author" id="main-author">— Napoleon Hill</div>
+            </div>
+        </div>
+
+        <div id="screen-todo" class="screen">
+            <div class="screen-title">✓ Yapılacaklar Matrisi</div>
+            <div class="input-group">
+                <input type="text" id="todo-input" placeholder="Sisteme yeni bir terminal görevi ekle...">
+                <button class="action-btn" onclick="addTodo()">GÖREV EKLE</button>
+            </div>
+            <div class="list-container" id="todo-list"></div>
+        </div>
+
+        <div id="screen-goals" class="screen">
+            <div class="screen-title">🎯 Stratejik Vizyon Hedefleri</div>
+            <div class="input-group">
+                <input type="text" id="goal-input" placeholder="Uzun vadeli hedef veya vizyon kilit noktası...">
+                <button class="action-btn" onclick="addGoal()">HEDEF EKLE</button>
+            </div>
+            <div class="list-container" id="goal-list"></div>
+        </div>
+
+        <div id="screen-calendar" class="screen">
+            <div class="screen-title">📅 Ajanda ve Etkinlik Zamanlayıcı</div>
+            <div class="input-group">
+                <input type="text" id="event-title-input" placeholder="Etkinlik operasyon adı...">
+                <input type="text" id="event-date-input" placeholder="GG.AA.YYYY" style="max-width: 200px;">
+                <button class="action-btn" onclick="addEvent()">PLANLA</button>
+            </div>
+            <div class="list-container" id="event-list"></div>
+        </div>
+
+        <div id="screen-spotify" class="screen">
+            <div class="screen-title">♫ Real-Time Spotify Control Center</div>
+            <div class="spotify-card">
+                <div id="track-name">Müzik Açık Değil</div>
+                <div id="artist-name">Spotify'dan bir şarkı oynatın...</div>
+                <div class="media-controls">
+                    <button class="media-btn">⏮</button>
+                    <button class="media-btn play-pause-btn">⏸</button>
+                    <button class="media-btn">⏭</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="screen-master" class="screen">
+            <div class="screen-title">🎛 Master Operations Dashboard Matrix</div>
+            <div class="matrix-grid" id="master-grid"></div>
+        </div>
+
+    </div>
+
+    <script>
+        // Ekran değiştirme animasyon ve fonksiyon mantığı (Geçici Hazır Yapı)
+        function switchScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById('screen-' + screenId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
