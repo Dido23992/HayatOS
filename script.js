@@ -269,3 +269,89 @@ document.addEventListener("DOMContentLoaded", () => {
 // SİSTEM BAŞLANGICI (INITIALIZE SCRIPT)
 // ==========================================
 loadSystemData();
+
+// SAAT MOTORU - Spotify çökerse bile bu asla durmaz
+function saatiGuncelle() {
+    const saatAlanlari = [
+        document.getElementById('current-time'),
+        document.querySelector('.matrix-card-title span'),
+        document.querySelector('.time-display')
+    ];
+    
+    const simdi = new Date();
+    const saatString = simdi.toLocaleTimeString('tr-TR');
+
+    saatAlanlari.forEach(el => {
+        if (el) el.innerText = saatString;
+    });
+}
+setInterval(saatiGuncelle, 1000);
+saatiGuncelle();
+
+// SPOTIFY MOTORU
+function spotifyGuncelle() {
+    fetch('http://127.0.0.1:5000/api/spotify')
+        .then(response => response.json())
+        .then(data => {
+            // Sitedeki yazı elementlerini buluyoruz
+            const sarkiYazi = document.querySelector('.real-spotify h1') || document.querySelector('.real-spotify h2') || document.getElementById('sarki-adi');
+            const sanatciYazi = document.querySelector('.real-spotify p') || document.getElementById('sanatci-adi');
+            const durumYazi = document.querySelector('.real-spotify span') || document.querySelector('.real-spotify h3');
+
+            if (sarkiYazi && sanatciYazi) {
+                if (data.durum === "active") {
+                    sarkiYazi.innerText = data.sarki;
+                    sanatciYazi.innerText = data.sanatci;
+                    if (durumYazi) durumYazi.innerText = "🎵 NOW PLAYING";
+                } else if (data.durum === "recent") {
+                    sarkiYazi.innerText = data.sarki;
+                    sanatciYazi.innerText = data.sanatci;
+                    if (durumYazi) durumYazi.innerText = "⏳ LAST PLAYED";
+                } else {
+                    sarkiYazi.innerText = data.sarki || "Müzik Açık Değil";
+                    sanatciYazi.innerText = data.sanatci || "Spotify'dan bir şarkı oynatın...";
+                    if (durumYazi) durumYazi.innerText = "🎧 SİBER SESSİZLİK";
+                }
+            }
+        })
+        .catch(err => console.log("Python API şu an kapalı:", err));
+}
+setInterval(spotifyGuncelle, 3000);
+spotifyGuncelle();
+
+// ESKİ SİSTEM BAŞLANGICI
+if (typeof loadSystemData === "function") {
+    loadSystemData();
+}
+// === 2. SPOTIFY FONKSİYONU (Son çalınanlar dahil) ===
+function spotifyGuncelle() {
+    fetch('http://127.0.0.1:5000/api/spotify')
+        .then(response => response.json())
+        .then(data => {
+            const sarkiYazi = document.getElementById('sarki-adi') || document.querySelector('.real-spotify h1') || document.querySelector('.real-spotify h2');
+            const sanatciYazi = document.getElementById('sanatci-adi') || document.querySelector('.real-spotify p');
+            const spotfYazi = document.querySelector('.real-spotify span') || document.querySelector('.real-spotify h3');
+
+            if (data.durum === "active") {
+                if (sarkiYazi) sarkiYazi.innerText = data.sarki;
+                if (sanatciYazi) sanatciYazi.innerText = data.sanatci;
+                if (spotfYazi) spotfYazi.innerText = "🎵 NOW PLAYING";
+            } else if (data.durum === "recent") {
+                // Spotify kapalıysa son çalınan şarkıyı buraya basıyor!
+                if (sarkiYazi) sarkiYazi.innerText = data.sarki;
+                if (sanatciYazi) sanatciYazi.innerText = data.sanatci;
+                if (spotfYazi) spotfYazi.innerText = "⏳ LAST PLAYED";
+            } else {
+                if (sarkiYazi) sarkiYazi.innerText = "Müzik Açık Değil";
+                if (sanatciYazi) sanatciYazi.innerText = "Spotify'dan bir şarkı oynatın...";
+            }
+        })
+        .catch(err => {
+            console.log("Python bağlantı hatası:", err);
+        });
+}
+setInterval(spotifyGuncelle, 3000); // Şarkıyı her 3 saniyede bir kontrol et
+spotifyGuncelle();
+
+// === 3. SİSTEMİ BAŞLAT ===
+loadSystemData();
